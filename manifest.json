@@ -2,11 +2,24 @@
   "manifest_version": 2,
   "name": "R Chrome Extension",
   "version": "0.0.3",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
   "browser_action": {
     "default_popup": "popup.html"
   },
   "permissions": [
     "tabs",
-    "clipboardWrite"
-  ]
+    "clipboardWrite",
+    "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": ["jquery-3.1.1.min.js", "contentscripts.js"],
+      "matches": [ "http://*/*", "https://*/*", "file://*" ],
+      "run_at": "document_end"
+    }
+  ]  
 }

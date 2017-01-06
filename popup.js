@@ -1,4 +1,32 @@
 const saveDataName = "SaveData";
+
+const debugTabProperties = ()=>{
+	chrome.tabs.getSelected(null, function(tab){
+		console.log([{
+			id:tab.id,
+			index:tab.index,
+			windowId:tab.windowId,
+			openerTabld:tab.openerTabld,
+			selected:tab.selected,
+			highlighted:tab.highlighted,
+			active:tab.active,
+			pinned:tab.pinned,
+			audible:tab.audible,
+			discarded:tab.discarded,
+			autoDiscardable:tab.autoDiscardable,
+			mutedInfo:tab.mutedInfo,
+			url:tab.url,
+			title:tab.title,
+			favlconUrl:tab.favlconUrl,
+			satatus:tab.satatus,
+			incognito:tab.incognito,
+			width:tab.width,
+			height:tab.height,
+			sessionId:tab.sessionId,
+		}]);
+	});
+}
+
 $(function(){
   //テキストエリアに文字列を貼りつけて、選択状態にしてクリップボードへコピーする
   const copyText = (val)=>{
@@ -58,7 +86,6 @@ $(function(){
   //保存データの読み込み
   const loadData = ()=>{
     const data = JSON.parse(localStorage.getItem(saveDataName));
-    console.log(data);
     if (data == null){
       //設定データがない場合、リストに初期値を指定
       addCopyFormat("[{1}]({0})");
@@ -67,6 +94,7 @@ $(function(){
       data.CopyFormat.forEach((x)=>{ addCopyFormat(x); });
       $("#CopyFormat").val(data.SelectedIndex);
     }
+    debugTabProperties();
   }
   loadData();
 });
