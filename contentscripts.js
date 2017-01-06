@@ -1,29 +1,33 @@
 //Mouse orver
-$("*").hover(
-  function(e){
-    let elm = e.target;
-  	console.log(elm.innerText);
-  	//elm.innerText.select();
-    //document.execCommand("copy");
-  },
-  function(e){
-  }
-);
+//$("*").hover(
+//  function(e){
+//    let elm = e.target;
+//  	console.log(elm.innerText);
+//  	//elm.innerText.select();
+//    //document.execCommand("copy");
+//  },
+//  function(e){
+//  }
+//);
 
-chrome.runtime.onMessage.addListener(
-	function(request, sender, sendResponse){
-		alert("hoge");
-		switch(request.type){
-			case 'add':
-				console.log("add");
-				break;
-		}
-	}
-);
+//chrome.runtime.onMessage.addListener(
+//	function(request, sender, sendResponse){
+//		alert("hoge");
+//		switch(request.type){
+//			case 'add':
+//				console.log("add");
+//				break;
+//		}
+//	}
+//);
 
+//[chrome.runtime.sendMessageでcontent_scriptsとbackground間で通信する方法 | Black Everyday Company](http://kuroeveryday.blogspot.jp/2015/06/ChromeExtensionssendMessage.html)
+//[chrome拡張機能 > background.jsからcontentscript.jsにメッセージを送る方法 · For myself tomorrow](https://tigawa.github.io/blog/2013/10/13/chrome-extensions-message/)
+//[Chrome Extensionの作り方講座その４・popupとContent Scriptを連携させてみる | ogatism](https://ogatism.jp/chrome_ext_4/)
 chrome.extension.onRequest.addListener(
 	function (request, sender, sendResponse) {
-		console.log("geho");
+		sendResponse($(":hover"));
+		//sendRequest({A: $(":hover"), B: "hoge"});
 	}
 );
 
