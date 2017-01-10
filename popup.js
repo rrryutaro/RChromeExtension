@@ -48,8 +48,9 @@ $(function(){
       saveData.CopyFormat.push(option.text);
     }
     saveData.SelectedIndex = $("#CopyFormat").val();
-    localStorage.setItem(saveDataName, JSON.stringify(saveData));
-    console.log(saveData);
+    chrome.storage.sync.set({
+      "CopyFormat": saveData
+    });
   });
   //設定データをクリアする
   $("#Clear").on("click", ()=>{
@@ -57,16 +58,17 @@ $(function(){
   });
   //保存データの読み込み
   const loadData = ()=>{
-    const data = JSON.parse(localStorage.getItem(saveDataName));
-    console.log(data);
-    if (data == null){
-      //設定データがない場合、リストに初期値を指定
-      addCopyFormat("[{1}]({0})");
-      $("#CopyFormat").val("1");
-    } else {
-      data.CopyFormat.forEach((x)=>{ addCopyFormat(x); });
-      $("#CopyFormat").val(data.SelectedIndex);
-    }
+    chrome.storage.sync.get(["CopyFormat"],items=>{
+      const data = items.CopyFormat;
+	  if (data == null){
+	    //設定データがない場合、リストに初期値を指定
+	    addCopyFormat("[{1}]({0})");
+	    $("#CopyFormat").val("1");
+	  } else {
+	    data.CopyFormat.forEach((x)=>{ addCopyFormat(x); });
+	    $("#CopyFormat").val(data.SelectedIndex);
+	  }
+    });
   }
   loadData();
 });
