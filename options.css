@@ -1,0 +1,13 @@
+body{
+  font-family:"ＭＳ ゴシック";
+  font-size:1em;
+}
+table{
+  border-style: solid none none solid;
+  border-width: 1px 0px 0px 1px;
+  border-spacing: 0px;
+  padding: 0px;
+}
+td {
+  white-space: nowrap;
+}

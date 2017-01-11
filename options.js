@@ -1,10 +1,10 @@
 $(()=>{
   chrome.storage.sync.get(["CopyData"],items=>{
-    items.CopyData.forEach(x=>{
+    items.CopyData.reverse().forEach(x=>{
       const tbl = $("#copyTable");
       switch (x.Type){
         case "TITLE":
-          tbl.append(formatString("<a href={0}>{1}</a>", [x.Data.Url, x.Data.Title]));
+          tbl.append(formatString("<tr><td><a href={0}>{1}</a></td></tr>", [x.Data.Url, x.Data.Title]));
           break;
       	case "IMG":
       	  tbl.append(formatString("<tr><td>{0}</td></tr>", [x.Data]));
