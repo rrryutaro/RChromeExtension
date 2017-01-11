@@ -23,7 +23,7 @@ const AddSaveData = (typeName, addData)=>{
   chrome.storage.sync.get(["CopyData"],items=>{
   	let saveData = items.CopyData;
     if (saveData==null)
-      saveData = [{}];
+      saveData = [];
     saveData.push({Type: typeName, Data: addData});
     chrome.storage.sync.set({ CopyData: saveData });
   });

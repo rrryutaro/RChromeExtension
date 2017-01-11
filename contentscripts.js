@@ -9,7 +9,7 @@ $("*").bind("contextmenu",()=>{
   }
 });
 chrome.extension.onRequest.addListener((request, sender, sendResponse)=>{
-  if (request.command==="Copy" & selectionTarget != null){
-    sendResponse({"obj": $(selectionTarget)[0].outerHTML});
+  if (request.command === "Copy" & selectionTarget != null){
+    sendResponse({"html": $(selectionTarget)[0].outerHTML});
   }
 });
