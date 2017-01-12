@@ -1,7 +1,7 @@
 {
   "name": "R Chrome Extension",
   "manifest_version": 2,
-  "version": "0.0.6.0",
+  "version": "0.0.6.1",
   "description": "コピー＆ペーストに関わる作業を効率化するための機能を盛り込んだツールです。（としていく予定）",
   "permissions": [
     "tabs", "clipboardWrite", "contextMenus", "storage"
