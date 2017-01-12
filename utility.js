@@ -29,3 +29,40 @@ const AddSaveData = (typeName, addData)=>{
   });
   copyText(addData);
 }
+
+const removeCopyData = index=>{
+  chrome.storage.sync.get(["CopyData"],items=>{
+  	let saveData = items.CopyData;
+    saveData.splice(index, 1);
+    chrome.storage.sync.set({ CopyData: saveData });
+ });
+}
+
+//以下のサイトよりコードを拝借しています。
+//[jQuery(JavaScript)でHTMLエスケープするときの注意点と対処法 | iwb.jp](https://iwb.jp/jquery-javascript-html-escape/)
+var escapeHtml = (function (String) {
+  var escapeMap = {
+    '&': '&amp;',
+    "'": '&#x27;',
+    '`': '&#x60;',
+    '"': '&quot;',
+    '<': '&lt;',
+    '>': '&gt;'
+  };
+  var escapeReg = '[';
+  var reg;
+  for (var p in escapeMap) {
+    if (escapeMap.hasOwnProperty(p)) {
+      escapeReg += p;
+    }
+  }
+  escapeReg += ']';
+  reg = new RegExp(escapeReg, 'g');
+ 
+  return function escapeHtml (str) {
+    str = (str === null || str === undefined) ? '' : '' + str;
+    return str.replace(reg, function (match) {
+      return escapeMap[match];
+    });
+  };
+}(String));

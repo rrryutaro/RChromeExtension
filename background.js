@@ -28,3 +28,12 @@ chrome.contextMenus.create({title: "オートコピー", parentId: "RCopy", cont
     });
   });
 }});
+
+chrome.extension.onRequest.addListener((request, sender, sendResponse)=>{
+  if (request.command === "copyOptionPageData"){
+  	console.log("hogehoge");
+    sendResponse({});
+  }
+});
+
+var copyToClipboard = val=>{ copyText(val); console.log(val); };
