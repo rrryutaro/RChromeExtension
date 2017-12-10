@@ -29,6 +29,18 @@ chrome.contextMenus.create({title: "オートコピー", parentId: "RCopy", cont
   });
 }});
 
+chrome.contextMenus.create({title: "ここにアンカーを追加", contexts: ["all"], onclick: info=>{
+  chrome.tabs.getSelected(null, tab=>{
+    chrome.tabs.sendRequest(tab.id, {command: "AddAnchor"});
+  });
+}});
+
+chrome.contextMenus.create({title: "ここを折りたたみ", contexts: ["all"], onclick: info=>{
+  chrome.tabs.getSelected(null, tab=>{
+    chrome.tabs.sendRequest(tab.id, {command: "AddDetails"});
+  });
+}});
+
 chrome.extension.onRequest.addListener((request, sender, sendResponse)=>{
   if (request.command === "copyOptionPageData"){
   	console.log("hogehoge");
